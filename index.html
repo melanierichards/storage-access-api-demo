@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Storage Access API Demo</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="comments" class="comments">
+      <div id="commentsLoggedOut">
+          <p>Sign into your Contoso Social account to post a comment.</p>
+          <button id="commentsSignIn">Sign in</button>
+      </div>
+      <div id="commentsLoggedIn">
+          <form>
+              <img src="melanie.jpg" class="comments__avatar" alt="" />
+              <p class="comments__posting-as">Posting as <a href="">Melanie Richards</a></p>
+              <textarea></textarea>
+              <button>Post comment</button>
+          </form>
+      </div>
+      <p class="comments__attr">Contoso Social Comments Plugin</p>
+    </div>
+
+    <script>
+      // Technically this doesn't access storage, just a demo of the method :)
+      document.getElementById('commentsSignIn').addEventListener('click', function(){
+          document.requestStorageAccess().then(
+              function () {
+              // Storage access was granted.
+                  document.getElementById('commentsLoggedOut').style.display = 'none';
+                  document.getElementById('commentsLoggedIn').style.display = 'block';
+              },
+              function () {
+              // Storage access was denied.
+              }
+          );
+      });
+    </script>
+  </body>
+</html>
